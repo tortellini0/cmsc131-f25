@@ -1,4 +1,4 @@
-package exercises.week00;
+package examples.helloworld;
 
 public class HelloWorld {
 

@@ -1,4 +1,4 @@
-package exercises.week01.Geometry;
+package examples.geometry;
 
 import java.util.Random;
 

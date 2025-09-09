@@ -1,4 +1,4 @@
-package exercises.week01.Geometry;
+package examples.geometry;
 
 public class Point {
     
