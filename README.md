@@ -9,18 +9,18 @@
 2. **Install the Dev Containers Extension**  
    Open VS Code → Extensions → search for "Dev Containers" → install.
 
-3. **Clone This Repository**  
-   ```bash
-   git clone git@github.com:johnmdusel/fcc-cmsc131-f25.git
-   cd fcc-cmsc131-f25
-   ```
+3. **Clone This Repository** 
+    1. In a new VS Code window, click the "Clone Git Repository..." option.
+    2. Copy-paste this URL: [https://github.com/johnmdusel-fcc/csmc131-25f-devcontainer.git](https://github.com/johnmdusel-fcc/csmc131-25f-devcontainer.git)
+    3. Select a repository destination.
 
-4. **Open in VS Code**
-    - Launch VS Code in this folder.
-    - When prompted, click **"Reopen in Container"** .
-    - Wait while the environment builds.
+5. **Open in VS Code**
+    1. Launch VS Code in this folder.
+    2. When prompted, click **"Reopen in Container"** .
+    3. Wait while the environment builds.
+        - You'll be prompted to install WSL (Windows Subsystem for Linux) and Docker during this step, if they aren't already on your system.
 
-5. **Verify Setup**
+6. **Verify Setup**
     Open a terminal inside VS Code and run:
     ```bash
     java --version
@@ -28,7 +28,7 @@
     ```
     You should see that Java is installed.
 
-6. **Run a Sanity Check** 
+7. **Run a Sanity Check** 
     
     6.1 Open `src/exercises/week00/HelloWorld.java` and use the play button (Run Java) to run the main routine. A terminal window should appear with output like this:
     ```
@@ -45,22 +45,22 @@
 More subdirectories will be added as the term goes on, but this high-level structure will stay the same.
 
 ```
-fcc-cmsc131-f15
+cmsc131-f15  # repository name
 ├── .devcontainer  # development environment
 │   ├── devcontainer.json
 │   └── Dockerfile
 ├── README.md  # you are here
 ├── src  # source code
-│   ├── exercises
-│   │   └── week00
-│   │       ├── HelloWorld.java
-│   │       └── README.md
+│   ├── examples
+│   │   └── canine
+│   │       ├── Canine.jva  # complete example
+│   │       └── README.md  # overview and spec
 │   ├── lib  # reusable components live in here
 │   │   └── Utils.java
 ├── test  # unit test code
-│   ├── exercises
-│   │   └── week00
-│   │       └── HelloWorldTest.java
+│   ├── examples
+│   │   └── canine
+│   │       └── CanineTest.java  # test coverage
 └── .vscode  # IDE settings
     └── settings.json
 ```
