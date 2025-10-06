@@ -51,7 +51,7 @@ public class Bank {
             );
         }
         for (int i = 0; i < bankAccounts.length; i++){
-            if(UID.equals(bankAccounts[i].getID())){
+            if((bankAccounts[i] !=null)&&(UID.equals(bankAccounts[i].getID()))  ){
                 return i;
             }
         }
