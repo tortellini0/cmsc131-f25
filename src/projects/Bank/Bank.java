@@ -3,8 +3,17 @@ package projects.Bank;
 public class Bank {
     private Account[] bankAccounts;
     private int numberOfAccounts;
+
+    /**
+     * constructer for Bank Class
+     * @param size - int - size > 0
+     */
     public Bank(int size){
-        bankAccounts = new Account[size];
+        if(size > 0){
+            bankAccounts = new Account[size];
+        }else{
+            bankAccounts = new Account[0];
+        }
         numberOfAccounts = 0;
     }
     /**
@@ -16,7 +25,7 @@ public class Bank {
     public boolean add(Account acc1){
         if (acc1 == null){
             throw new IllegalArgumentException(
-                "acc1 cant be null"
+                "Account acc1 cant be null"
             );
         }else{
             if(bankAccounts.length > numberOfAccounts){
