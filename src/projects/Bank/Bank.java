@@ -3,18 +3,15 @@ package projects.Bank;
 public class Bank {
     private Account[] bankAccounts;
     private int numberOfAccounts;
+    private final int incrementAcount = 100;
 
     /**
      * constructer for Bank Class
-     * @param size - int - size > 0
      */
-    public Bank(int size){
-        if(size > 0){
-            bankAccounts = new Account[size];
-        }else{
-            bankAccounts = new Account[0];
-        }
-        numberOfAccounts = 0;
+    public Bank(){
+        
+            bankAccounts = new Account[incrementAcount];
+            numberOfAccounts = 0;
     }
     /**
      * Adds and Account to the bankAccounts array
@@ -28,8 +25,17 @@ public class Bank {
                 "Account acc1 cant be null"
             );
         }else{
-            if(bankAccounts.length > numberOfAccounts){
-                bankAccounts[numberOfAccounts] = acc1;
+            if(find(acc1.getID()) == -1){
+                try{
+                    
+                    bankAccounts[numberOfAccounts] = acc1;
+                }catch (ArrayIndexOutOfBoundsException e){
+                    Account[] tempAccount = new Account[bankAccounts.length + incrementAcount];
+                    for (int i = 0; i < bankAccounts.length; i++){
+                        tempAccount[i] = bankAccounts[i];
+                    }
+                    tempAccount[numberOfAccounts] = acc1;
+                }
                 numberOfAccounts++;
                 return true;
             }else{

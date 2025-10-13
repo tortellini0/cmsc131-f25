@@ -11,7 +11,7 @@ public class BankTest {
 
     @BeforeEach
     void setUp(){
-        bank1 = new Bank(5);
+        bank1 = new Bank();
         bank1.add(new Account("id1", "name1", 1.0, AccountType.SAVINGS));
         bank1.add(new Account("id2", "name2", 2.0, AccountType.SAVINGS));
         bank1.add(new Account("id3", "name3", 3.0, AccountType.SAVINGS));
@@ -67,7 +67,7 @@ public class BankTest {
     @Test
     void addReturnsFalseForFailedAdd(){
         bank1.add(new Account("id5", "name5", 5.0, AccountType.CHECKING));
-        boolean t = bank1.add(new Account("id6", "name6", 6.0, AccountType.CHECKING));
+        boolean t = bank1.add(new Account("id3", "name6", 6.0, AccountType.CHECKING));
         assertEquals(t , false);
     }
 
