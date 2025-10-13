@@ -42,4 +42,15 @@ public class AccountTest {
             exception.getMessage()
         );
     }
+
+    //"savings,wz240833,Anna Gomez,8111.00"
+    @Test
+    void accountMakeWorks(){
+        Account acc2 = Account.make("savings,wz240833,Anna Gomez,8111.00");
+        assertEquals(AccountType.SAVINGS,acc2.getType());
+        assertEquals("wz240833",acc2.getID());
+        assertEquals("Anna Gomez", acc2.getName());
+        assertEquals(8111.0,acc2.getBalance());
+
+    }
 }
