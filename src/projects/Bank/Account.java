@@ -73,4 +73,17 @@ public class Account{
         return new Account(UID, name, balance, type);
 
     }
+    /**
+     * turns an Account into a String for a csv file
+     * @return - String - line made of the parts of an Account (type, UID, name, balance)
+     */
+    public String toCSV(){
+        String type = getType().name().toLowerCase();
+        String name = getName();
+        String UID = getID();
+        String balance = Double.toString(getBalance());
+        String[] csvParts = {type, UID, name, balance};
+        String csvLine = String.join(",", csvParts);
+        return csvLine;
+    }
 }

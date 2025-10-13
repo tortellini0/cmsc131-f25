@@ -53,4 +53,11 @@ public class AccountTest {
         assertEquals(8111.0,acc2.getBalance());
 
     }
+
+
+    @Test
+    void toCSVWorks(){
+        String line = account1.toCSV();
+        assertEquals(line, "savings,123456789,jogn,1000.0");
+    }
 }
