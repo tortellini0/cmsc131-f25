@@ -58,6 +58,17 @@ public class AccountTest {
     @Test
     void toCSVWorks(){
         String line = account1.toCSV();
-        assertEquals(line, "savings,123456789,jogn,1000.0");
+        assertEquals(line, "savings,123456789,jogn,1000.00");
+    }
+    @Test
+    void makeThrowsForInvalidArgument() {
+        Exception exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> {Account.make(null);}
+        );
+        assertEquals(
+            "csvLine cant be null",
+            exception.getMessage()
+        );
     }
 }

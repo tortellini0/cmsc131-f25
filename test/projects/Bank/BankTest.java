@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class BankTest {
     public Bank bank1;
@@ -71,5 +76,48 @@ public class BankTest {
         assertEquals(t , false);
     }
 
+    @Test
+    void verifyLoadAccountsAndWriteCSV(){
+        Bank bank2 = new Bank();
+        String read = "/workspaces/cmsc131-f25/data/accounts.csv";
+        String write = "/workspaces/cmsc131-f25/data/20251013.csv";
+        bank2.loadCSV(read);
+        bank2.writeCSV(write);
+        try{
+            File fileR = new File(read);
+            File fileW = new File(write);
+            Scanner scannerR = new Scanner(fileR);
+            Scanner scannerW = new Scanner(fileW);
+            while ((scannerR.hasNextLine()) || (scannerW.hasNextLine())){
+                assertEquals(scannerR.nextLine(), scannerW.nextLine());
+            }
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void loadCSVThrowsForInvalidFileName() {
+        Exception exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> {bank1.loadCSV(null);}
+        );
+        assertEquals(
+            "fileName cant be null",
+            exception.getMessage()
+        );
+    }
+    @Test
+    void writeCSVThrowsForInvalidFileName() {
+        Exception exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> {bank1.writeCSV(null);}
+        );
+        assertEquals(
+            "fileName cant be null",
+            exception.getMessage()
+        );
+    }
+    
     
 }

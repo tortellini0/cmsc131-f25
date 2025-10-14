@@ -64,6 +64,9 @@ public class Account{
      * @return account made useing csv line
      */
     public static Account make(String csvLine){
+        if(csvLine == null){
+            throw new IllegalArgumentException("csvLine cant be null");
+        }
         String[] parts = csvLine.split(",");
 
         AccountType type = AccountType.valueOf(parts[0].toUpperCase());
@@ -81,7 +84,7 @@ public class Account{
         String type = getType().name().toLowerCase();
         String name = getName();
         String UID = getID();
-        String balance = Double.toString(getBalance());
+        String balance = String.format("%.2f", getBalance());//Double.toString(getBalance());
         String[] csvParts = {type, UID, name, balance};
         String csvLine = String.join(",", csvParts);
         return csvLine;

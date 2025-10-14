@@ -1,4 +1,10 @@
 package projects.Bank;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 
 public class Bank {
     private Account[] bankAccounts;
@@ -35,6 +41,7 @@ public class Bank {
                         tempAccount[i] = bankAccounts[i];
                     }
                     tempAccount[numberOfAccounts] = acc1;
+                    bankAccounts = tempAccount;
                 }
                 numberOfAccounts++;
                 return true;
@@ -71,5 +78,56 @@ public class Bank {
         return numberOfAccounts;
     }
 
+    /**
+     * loops through a csv file to fill bankAccounts with
+     * @param fileName - String - location of the csv file to read from
+     * @return true / false if the function worked
+     */
+    public boolean loadCSV(String fileName){
+        if (fileName == null){
+            throw new IllegalArgumentException("fileName cant be null");
+        }
+
+        File accountsFile = new File(fileName);
+        boolean succeed = true;
+        Scanner scanner;
+        try{
+            scanner = new Scanner(accountsFile);
+            while(scanner.hasNextLine()){
+                String curLine = scanner.nextLine();
+                add(Account.make(curLine));
+            }
+        }catch(FileNotFoundException e){
+            
+            e.printStackTrace();
+            succeed = false;
+        }
+        return succeed;
+    }
+
+    /**
+     * converts the bankAccounts array into a csv file
+     * @param fileName - String - location to write to
+     * @return true / false if the function worked
+     */
+    public boolean writeCSV(String fileName){
+        if (fileName == null){
+            throw new IllegalArgumentException("fileName cant be null");
+        }
+        File file = new File(fileName);
+        FileWriter writer;
+        try{
+            writer = new FileWriter(file);
+            for (int i = 0; i < numberOfAccounts; i++){
+                String csvLine = bankAccounts[i].toCSV();
+                writer.write(csvLine + System.lineSeparator());
+            }
+            writer.close();
+            return true;
+        }catch(IOException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
