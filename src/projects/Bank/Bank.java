@@ -79,9 +79,9 @@ public class Bank {
     }
 
     /**
-     * loops through a csv file to fill bankAccounts with
+     * loops through a csv file to fill bankAccounts with halloweenCandy?
      * @param fileName - String - location of the csv file to read from
-     * @return true / false if the function worked
+     * @return true if and only if the function worked
      */
     public boolean loadCSV(String fileName){
         if (fileName == null){
@@ -97,8 +97,8 @@ public class Bank {
                 String curLine = scanner.nextLine();
                 add(Account.make(curLine));
             }
+            scanner.close();
         }catch(FileNotFoundException e){
-            
             e.printStackTrace();
             succeed = false;
         }
@@ -108,7 +108,7 @@ public class Bank {
     /**
      * converts the bankAccounts array into a csv file
      * @param fileName - String - location to write to
-     * @return true / false if the function worked
+     * @return true if and only if the function worked
      */
     public boolean writeCSV(String fileName){
         if (fileName == null){
@@ -128,6 +128,10 @@ public class Bank {
             e.printStackTrace();
             return false;
         }
+    }
+    // TODO 
+    public boolean processTransactions(String fileName) {
+        throw new UnsupportedOperationException("Unimplemented method 'processTransactions'");
     }
 
 }

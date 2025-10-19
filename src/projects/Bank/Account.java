@@ -65,6 +65,7 @@ public class Account{
      */
     public static Account make(String csvLine){
         if(csvLine == null){
+            // TODO lacks test coverage
             throw new IllegalArgumentException("csvLine cant be null");
         }
         String[] parts = csvLine.split(",");

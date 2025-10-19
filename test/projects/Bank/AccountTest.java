@@ -51,8 +51,9 @@ public class AccountTest {
         assertEquals("wz240833",acc2.getID());
         assertEquals("Anna Gomez", acc2.getName());
         assertEquals(8111.0,acc2.getBalance());
-
     }
+
+    // TODO test static factory throws on null input
 
 
     @Test

@@ -79,10 +79,10 @@ public class BankTest {
     @Test
     void verifyLoadAccountsAndWriteCSV(){
         Bank bank2 = new Bank();
-        String read = "/workspaces/cmsc131-f25/data/accounts.csv";
-        String write = "/workspaces/cmsc131-f25/data/20251013.csv";
-        bank2.loadCSV(read);
-        bank2.writeCSV(write);
+        String read = "data/accounts.csv";
+        String write = "data/20251013.csv";
+        bank2.loadCSV(read); // TODO test returned value
+        bank2.writeCSV(write); // TODO test returned value
         try{
             File fileR = new File(read);
             File fileW = new File(write);
@@ -91,11 +91,15 @@ public class BankTest {
             while ((scannerR.hasNextLine()) || (scannerW.hasNextLine())){
                 assertEquals(scannerR.nextLine(), scannerW.nextLine());
             }
+            scannerR.close();
+            scannerW.close();
         }catch (FileNotFoundException e){
             e.printStackTrace();
         }
     }
 
+    // Phase 2 failure mode coverage
+    // TODO include tests for loadAccounts and writeAccounts returning false
     @Test
     void loadCSVThrowsForInvalidFileName() {
         Exception exception = assertThrows(
