@@ -13,16 +13,14 @@ public class AccountTest {
 
     @BeforeEach
     void setup(){
-        account1 = new Account("123456789","jogn",1000.0,AccountType.SAVINGS);
+        account1 = new SavingsAccount("123456789","jogn",1000.0);  
     }
-    
-    
 
     @Test
     void constructorThrowsForInvalidID(){
         Exception exception = assertThrows(
             IllegalArgumentException.class, 
-            () -> {new Account(null,"Jogn",100.0,AccountType.SAVINGS);}
+            () -> {new SavingsAccount(null,"Jogn",100.0);}
         );
         assertEquals(
             "ID cant be null.",
@@ -34,7 +32,7 @@ public class AccountTest {
     void constructerThrowsForInvalidName(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-            () -> {new Account("123456789",null,100000.0,AccountType.CHECKING);}
+            () -> {new SavingsAccount("123456789",null,100000.0);}
 
         );
         assertEquals(

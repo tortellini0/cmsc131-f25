@@ -1,18 +1,17 @@
 package projects.Bank;
-public class Account{
+abstract class Account{
     private final String accountID;
     private String accountName;
     private double accountBalance;
-    private final AccountType accountType;
+    abstract AccountType getType();
     /**
      * Constructer to initialize an Account
      * @param id - String - ID for each account made
      * @param name - String - Name associated with wach account
      * @param balance - double - balance of account
-     * @param type - AccountType CHECKING or SAVINGS - is the account a savings account or checkings account
      * @throws IllegalArgumentException If id or name is null
      */
-    public Account(String id, String name, double balance, AccountType type){
+    public Account(String id, String name, double balance){
         if(id == null){
             throw new IllegalArgumentException(
                 "ID cant be null."
@@ -25,7 +24,6 @@ public class Account{
             accountID = id;
             accountName = name;
             accountBalance = balance;
-            accountType = type;
         }
     }
     /**
@@ -53,14 +51,11 @@ public class Account{
      * Accesor method to get accountType
      * @return - AccountType - type of account
      */
-    public AccountType getType(){ 
-        return accountType;
-    }
     // ""
     //sample string "savings,wz240833,Anna Gomez,8111.00"
     /**
      * make an Account with a line from csv
-     * @param csvLine - String - line from a csv file
+     * @param csvLine - String - "AccountType,accountID,name,balance" - line from a csv file
      * @return account made useing csv line
      */
     public static Account make(String csvLine){
@@ -74,7 +69,12 @@ public class Account{
         String UID = parts[1];
         String name = parts[2];
         double balance = Double.valueOf(parts[3]);
-        return new Account(UID, name, balance, type);
+        if (type == AccountType.SAVINGS){
+            return new SavingsAccount(UID, name, balance);
+        }else {
+            return new CheckingAccount(UID, name, balance);
+        }
+
 
     }
     /**
