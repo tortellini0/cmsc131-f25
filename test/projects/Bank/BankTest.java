@@ -17,10 +17,10 @@ public class BankTest {
     @BeforeEach
     void setUp(){
         bank1 = new Bank();
-        bank1.add(new Account("id1", "name1", 1.0, AccountType.SAVINGS));
-        bank1.add(new Account("id2", "name2", 2.0, AccountType.SAVINGS));
-        bank1.add(new Account("id3", "name3", 3.0, AccountType.SAVINGS));
-        bank1.add(new Account("id4", "name4", 4.0, AccountType.SAVINGS));
+        bank1.add(new SavingsAccount("id1", "name1", 1.0));
+        bank1.add(new SavingsAccount("id2", "name2", 2.0));
+        bank1.add(new SavingsAccount("id3", "name3", 3.0));
+        bank1.add(new SavingsAccount("id4", "name4", 4.0));
     }
 
 
@@ -66,13 +66,13 @@ public class BankTest {
 
     @Test
     void addReturnsTrueForAddedAccount(){
-        boolean t = bank1.add(new Account("id5", "name5", 5.0, AccountType.CHECKING));
+        boolean t = bank1.add(new CheckingAccount("id5", "name5", 5.0));
         assertEquals(t , true);
     }
     @Test
     void addReturnsFalseForFailedAdd(){
-        bank1.add(new Account("id5", "name5", 5.0, AccountType.CHECKING));
-        boolean t = bank1.add(new Account("id3", "name6", 6.0, AccountType.CHECKING));
+        bank1.add(new CheckingAccount("id5", "name5", 5.0));
+        boolean t = bank1.add(new CheckingAccount("id3", "name6", 6.0));
         assertEquals(t , false);
     }
 
