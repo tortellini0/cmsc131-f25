@@ -81,8 +81,8 @@ public class BankTest {
         Bank bank2 = new Bank();
         String read = "data/accounts.csv";
         String write = "data/20251013.csv";
-        bank2.loadCSV(read); // TODO test returned value
-        bank2.writeCSV(write); // TODO test returned value
+        assertEquals(true,bank2.loadCSV(read)); 
+        assertEquals(true,bank2.writeCSV(write));  
         try{
             File fileR = new File(read);
             File fileW = new File(write);
@@ -98,8 +98,22 @@ public class BankTest {
         }
     }
 
-    // Phase 2 failure mode coverage
-    // TODO include tests for loadAccounts and writeAccounts returning false
+    @Test
+    void loadAccountsReturnsFalse(){
+        Bank bank2 = new Bank();
+        String fileName = "invalid file name";
+        boolean succeed = bank2.loadCSV(fileName);
+        assertEquals(false, succeed);
+    }
+
+    @Test
+    void writeAccountsReturnsFalse(){
+        Bank bank2 = new Bank();
+        String fileName = "not/a/real.file";
+        boolean succeed = bank2.writeCSV(fileName);
+        assertEquals(false, succeed);
+    }
+
     @Test
     void loadCSVThrowsForInvalidFileName() {
         Exception exception = assertThrows(
