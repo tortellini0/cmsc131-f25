@@ -51,14 +51,6 @@ public class AccountTest {
         assertEquals(8111.0,acc2.getBalance());
     }
 
-    // TODO test static factory throws on null input
-
-
-    @Test
-    void toCSVWorks(){
-        String line = account1.toCSV();
-        assertEquals(line, "savings,123456789,jogn,1000.00");
-    }
     @Test
     void makeThrowsForInvalidArgument() {
         Exception exception = assertThrows(
@@ -70,4 +62,11 @@ public class AccountTest {
             exception.getMessage()
         );
     }
+
+    @Test
+    void toCSVWorks(){
+        String line = account1.toCSV();
+        assertEquals("savings,123456789,jogn,1000.00", line);
+    }
+    
 }

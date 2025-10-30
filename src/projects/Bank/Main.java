@@ -7,8 +7,9 @@ import java.io.IOException;
 public class Main {
 
         public static void main(String[] args) {
-        phase1();
-        phase2();
+        //phase1();
+        //phase2();
+        phase3();
     }
 
     public static void phase1() {
@@ -16,11 +17,10 @@ public class Main {
         try {
             FileWriter writer = new FileWriter(new File(logName));
 
-            Account acct = new Account(
+            Account acct = new SavingsAccount(
                 "id1",
                 "Owner Name",
-                1.0,
-                AccountType.SAVINGS
+                1.0
             );
             
             writer.write(
@@ -78,9 +78,9 @@ public class Main {
     public static void phase3() {
         Bank bank = new Bank();
         bank.loadCSV("data/accounts.csv"); // ignore output
-        boolean step2 = bank.processTransactions("data/transactions.csv");
+        int step2 = bank.processTransactions("data/transactions.csv");
         boolean step3 = bank.writeCSV("data/accounts.csv");
-        System.out.println("Transactions process: " + step2);
+        System.out.println("Transactions processed: " + step2);
         System.out.println("Accounts write: " + step3);
     }
 

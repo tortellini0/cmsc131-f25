@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class BankTest {
     public Bank bank1;
+    public Bank bank2;
 
     @BeforeEach
     void setUp(){
@@ -21,6 +22,7 @@ public class BankTest {
         bank1.add(new SavingsAccount("id2", "name2", 2.0));
         bank1.add(new SavingsAccount("id3", "name3", 3.0));
         bank1.add(new SavingsAccount("id4", "name4", 4.0));
+        bank2 = new Bank();
     }
 
 
@@ -78,7 +80,6 @@ public class BankTest {
 
     @Test
     void verifyLoadAccountsAndWriteCSV(){
-        Bank bank2 = new Bank();
         String read = "data/accounts.csv";
         String write = "data/20251013.csv";
         assertEquals(true,bank2.loadCSV(read)); 
@@ -100,7 +101,6 @@ public class BankTest {
 
     @Test
     void loadAccountsReturnsFalse(){
-        Bank bank2 = new Bank();
         String fileName = "invalid file name";
         boolean succeed = bank2.loadCSV(fileName);
         assertEquals(false, succeed);
@@ -108,7 +108,6 @@ public class BankTest {
 
     @Test
     void writeAccountsReturnsFalse(){
-        Bank bank2 = new Bank();
         String fileName = "not/a/real.file";
         boolean succeed = bank2.writeCSV(fileName);
         assertEquals(false, succeed);
@@ -125,11 +124,38 @@ public class BankTest {
             exception.getMessage()
         );
     }
+
     @Test
     void writeCSVThrowsForInvalidFileName() {
         Exception exception = assertThrows(
             IllegalArgumentException.class,
             () -> {bank1.writeCSV(null);}
+        );
+        assertEquals(
+            "fileName cant be null",
+            exception.getMessage()
+        );
+    }
+
+     @Test
+    void testProcessTransactionsSuccess() {
+        bank2.loadCSV("data/accounts.csv");
+        int numOfTransactions = bank2.processTransactions("data/testtransactions.csv");
+        assertEquals(4, numOfTransactions);
+    }
+
+    @Test
+    void testProcessTransactionsFailure() {
+        bank2.loadCSV("data/accounts.csv");
+        int numOfTransactions = bank2.processTransactions("notAFolder/notAFile.csv");
+        assertEquals(0,numOfTransactions);
+    }
+
+    @Test
+    void processTransactionsThrowsForInvalidFileName() {
+        Exception exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> {bank2.processTransactions(null);}
         );
         assertEquals(
             "fileName cant be null",

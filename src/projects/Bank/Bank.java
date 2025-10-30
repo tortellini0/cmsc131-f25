@@ -79,7 +79,7 @@ public class Bank {
     }
 
     /**
-     * loops through a csv file to fill bankAccounts with halloweenCandy?
+     * loops through a csv file to fill bankAccounts with Accounts
      * @param fileName - String - location of the csv file to read from
      * @return true if and only if the function worked
      */
@@ -114,9 +114,10 @@ public class Bank {
         if (fileName == null){
             throw new IllegalArgumentException("fileName cant be null");
         }
-        File file = new File(fileName);
-        FileWriter writer;
+        
         try{
+            File file = new File(fileName);
+            FileWriter writer;
             writer = new FileWriter(file);
             for (int i = 0; i < numberOfAccounts; i++){
                 String csvLine = bankAccounts[i].toCSV();
@@ -129,9 +130,41 @@ public class Bank {
             return false;
         }
     }
-    // TODO 
-    public boolean processTransactions(String fileName) {
-        throw new UnsupportedOperationException("Unimplemented method 'processTransactions'");
+    /**
+     * Takes a csv file of transactions and runs them 
+     * @param fileName - String - name of file that is storing the transactions
+     * @return - int - number of transactions 
+     */ 
+    public int processTransactions(String fileName) {
+        if(fileName == null){
+            throw new IllegalArgumentException("fileName cant be null");
+        }
+        int numTransactions = 0;
+        Scanner scan;
+        try{
+            scan = new Scanner(new File(fileName));
+            while(scan.hasNextLine()) {
+                Transaction t = Transaction.make(scan.nextLine());
+                int index = find(t.getAccountID());
+                if(index >= 0){
+                    Account target = bankAccounts[index];
+                    if(t.validate(target)){
+                        t.execute(target);
+                        System.out.println("successful transaction for transaction number " + numTransactions);
+                    }else{
+                        System.out.println("non suficient funds in account " + t.getAccountID() + " for transaction number " + numTransactions);
+                    }
+
+                }else{
+                    System.out.println("no such account with ID - " + t.getAccountID() + " for transaction number " + numTransactions);    
+                }
+                numTransactions++;
+
+            }
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        return numTransactions;
     }
 
 }
