@@ -3,7 +3,13 @@ abstract class Account{
     private final String accountID;
     private String accountName;
     private double accountBalance;
+    
+    /**
+     * Accesor method to get accountType
+     * @return - AccountType - type of account
+     */
     abstract AccountType getType();
+
     /**
      * Constructer to initialize an Account
      * @param id - String - ID for each account made
@@ -26,6 +32,7 @@ abstract class Account{
             accountBalance = balance;
         }
     }
+
     /**
      * Accesor method to get ID
      * @return - String - ID of the account
@@ -33,6 +40,7 @@ abstract class Account{
     public String getID(){
         return accountID;
     }
+
     /**
      * Accesor method to get account Name
      * @return - string - Name of the account
@@ -40,6 +48,7 @@ abstract class Account{
     public String getName(){
         return accountName;
     }
+
     /**
      * Accesor method to get balance
      * @return - double - balance of the account
@@ -47,12 +56,7 @@ abstract class Account{
     public double getBalance(){
         return accountBalance;
     }
-    /**
-     * Accesor method to get accountType
-     * @return - AccountType - type of account
-     */
-    // ""
-    //sample string "savings,wz240833,Anna Gomez,8111.00"
+    
     /**
      * make an Account with a line from csv
      * @param csvLine - String - "AccountType,accountID,name,balance" - line from a csv file
@@ -60,7 +64,6 @@ abstract class Account{
      */
     public static Account make(String csvLine){
         if(csvLine == null){
-            // TODO lacks test coverage
             throw new IllegalArgumentException("csvLine cant be null");
         }
         String[] parts = csvLine.split(",");
@@ -89,5 +92,21 @@ abstract class Account{
         String[] csvParts = {type, UID, name, balance};
         String csvLine = String.join(",", csvParts);
         return csvLine;
+    }
+
+    /**
+     * increases the balance of the account
+     * @param amount - double - amount the balance is increased.
+     */
+    public void increaseBal(double amount){
+        accountBalance += amount;
+    }
+
+     /**
+     * decreases the balance of the account
+     * @param amount - double - amount the balance is decreased.
+     */
+    public void decreaseBal(double amount){
+        accountBalance -= amount;
     }
 }
