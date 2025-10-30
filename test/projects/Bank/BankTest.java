@@ -139,14 +139,14 @@ public class BankTest {
 
      @Test
     void testProcessTransactionsSuccess() {
-        bank2.loadCSV("data/accounts.csv");
+        bank2.loadCSV("data/testaccounts.csv");
         int numOfTransactions = bank2.processTransactions("data/testtransactions.csv");
         assertEquals(4, numOfTransactions);
     }
 
     @Test
     void testProcessTransactionsFailure() {
-        bank2.loadCSV("data/accounts.csv");
+        bank2.loadCSV("data/testaccounts.csv");
         int numOfTransactions = bank2.processTransactions("notAFolder/notAFile.csv");
         assertEquals(0,numOfTransactions);
     }
