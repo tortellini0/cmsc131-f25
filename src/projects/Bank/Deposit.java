@@ -15,4 +15,8 @@ public class Deposit extends Transaction {
     
     @Override
     public TransactionType getType(){return TransactionType.DEPOSIT;}
+
+    public String toString(){
+        return "deposit to " + getAccountID();
+    }
 }

@@ -21,7 +21,10 @@ public class Withdrawal extends Transaction {
         acc1.decreaseBal(getAmount());
      }
 
-    
      @Override
      public TransactionType getType(){return TransactionType.WITHDRAWAL;}
+
+     public String toString(){
+      return "withdrawal from " + getAccountID();
+     }
 }
