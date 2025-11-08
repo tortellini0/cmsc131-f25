@@ -132,38 +132,48 @@ public class Bank {
     }
     /**
      * Takes a csv file of transactions and runs them 
-     * @param fileName - String - name of file that is storing the transactions
+     * @param transactionFileName - String - name of file that is storing the transactions
      * @return - int - number of transactions 
      */ 
-    public int processTransactions(String fileName) {
-        if(fileName == null){
+    public int processTransactions(String transactionFileName, String auditFileName) {
+        if(transactionFileName == null){
             throw new IllegalArgumentException("fileName cant be null");
         }
         int numTransactions = 0;
-        Scanner scan;
+
         try{
-            scan = new Scanner(new File(fileName));
-            while(scan.hasNextLine()) {
-                Transaction t = Transaction.make(scan.nextLine());
-                int index = find(t.getAccountID());
-                if(index >= 0){
-                    Account target = bankAccounts[index];
-                    if(t.validate(target)){
-                        t.execute(target);
-                        System.out.println("successful transaction for transaction number " + numTransactions);
+            Audit audit = new Audit(auditFileName);
+            Scanner scan;
+            try{
+                scan = new Scanner(new File(transactionFileName));
+                while(scan.hasNextLine()) {
+                    Transaction t = Transaction.make(scan.nextLine());
+                    int index = find(t.getAccountID());
+                    if(index >= 0){
+                        Account target = bankAccounts[index];
+                        if(t.validate(target)){
+                            t.execute(target);
+                            audit.recordExecute(t, target);
+                        }else{
+                            audit.recordNSF(t, target);
+                        }
+
                     }else{
-                        System.out.println("non suficient funds in account " + t.getAccountID() + " for transaction number " + numTransactions);
+                        audit.recordNSA(t);    
                     }
+                    numTransactions++;
 
-                }else{
-                    System.out.println("no such account with ID - " + t.getAccountID() + " for transaction number " + numTransactions);    
                 }
-                numTransactions++;
-
+                audit.close();
+                scan.close();
+            }catch(FileNotFoundException e){
+            e.printStackTrace();
             }
-        }catch(FileNotFoundException e){
+
+        }catch(IOException e){
             e.printStackTrace();
         }
+        System.out.println(numTransactions);
         return numTransactions;
     }
 

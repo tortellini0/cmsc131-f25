@@ -140,14 +140,14 @@ public class BankTest {
      @Test
     void testProcessTransactionsSuccess() {
         bank2.loadCSV("data/testaccounts.csv");
-        int numOfTransactions = bank2.processTransactions("data/testtransactions.csv");
+        int numOfTransactions = bank2.processTransactions("data/testtransactions.csv","test/projects/audit.log");
         assertEquals(4, numOfTransactions);
     }
 
     @Test
     void testProcessTransactionsFailure() {
         bank2.loadCSV("data/testaccounts.csv");
-        int numOfTransactions = bank2.processTransactions("notAFolder/notAFile.csv");
+        int numOfTransactions = bank2.processTransactions("notAFolder/notAFile.csv","test/projects/audit.log");
         assertEquals(0,numOfTransactions);
     }
 
@@ -155,7 +155,7 @@ public class BankTest {
     void processTransactionsThrowsForInvalidFileName() {
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-            () -> {bank2.processTransactions(null);}
+            () -> {bank2.processTransactions(null,"");}
         );
         assertEquals(
             "fileName cant be null",

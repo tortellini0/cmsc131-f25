@@ -78,7 +78,7 @@ public class Main {
     public static void phase3() {
         Bank bank = new Bank();
         bank.loadCSV("data/accounts.csv"); // ignore output
-        int step2 = bank.processTransactions("data/transactions.csv");
+        int step2 = bank.processTransactions("data/transactions.csv", "data/audit.log");
         boolean step3 = bank.writeCSV("data/accounts.csv");
         System.out.println("Transactions processed: " + step2);
         System.out.println("Accounts write: " + step3);

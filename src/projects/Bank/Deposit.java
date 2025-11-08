@@ -17,6 +17,7 @@ public class Deposit extends Transaction {
     public TransactionType getType(){return TransactionType.DEPOSIT;}
 
     public String toString(){
-        return "deposit to " + getAccountID();
+        String line = String.format("deposit of %.2f to sccount %s",getAmount(),getAccountID());
+        return line;
     }
 }
