@@ -68,5 +68,8 @@ public class AccountTest {
         String line = account1.toCSV();
         assertEquals("savings,123456789,jogn,1000.00", line);
     }
+
+    // TODO test correctness of increaseBal
+    // TODO test correctness of decreaseBal
     
 }
