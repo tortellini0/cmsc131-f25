@@ -7,11 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import lib.Utils;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -20,7 +17,7 @@ public class AuditTest {
     Audit audit;
     @BeforeEach
     void setup(){
-        fileName = "test/projects/auditTest.log";
+        fileName = "test/projects/bank/auditTest.log";
         try{
             audit = new Audit(fileName);
         }catch(IOException e){

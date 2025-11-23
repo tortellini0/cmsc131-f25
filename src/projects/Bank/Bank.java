@@ -155,6 +155,11 @@ public class Bank {
                             t.execute(target);
                             audit.recordExecute(t, target);
                         }else{
+                            /**
+                             * ok, but must be changed if (hypothetically) 
+                             * another type of validation error is introduced 
+                             * to the simulation
+                             */ 
                             audit.recordNSF(t, target);
                         }
 
