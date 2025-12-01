@@ -38,10 +38,16 @@ public class Maze {
         Cell start = grid.getFirstCellWithStatus(CellStatus.S);
         return start;
     }
-
+    /**
+     * inserts a cell into the grid held by a maze
+     * @param cell - cell that is being inserted
+     */
     public void insertCell(Cell cell){
         grid.insertCell(cell);
     }
+    /** 
+     * sets up the neighbors of each cell in the grid
+    */
     public void discoverAndSetupNeighbors() {
         Cell[] cellList = grid.getAllCells();
         for (int i = 0; i < cellList.length; i++){
@@ -57,7 +63,12 @@ public class Maze {
             }
         }
     }
-    
+    /**
+     * compares 2 cells to see if they are orthogonal by checking the absolute difference of the rows and columns
+     * @param cell1 - Cell - first cell
+     * @param cell2 - Cell - second cell
+     * @return - boolean - true if they are orthogonal - false if they are not orthogonal
+     */
     public boolean checkOrthogonal(Cell cell1, Cell cell2){
         int horizontalDifference = Math.abs(cell1.getCoords().getRow()-cell2.getCoords().getRow());
         int verticalDifference = Math.abs(cell1.getCoords().getCol()-cell2.getCoords().getCol());

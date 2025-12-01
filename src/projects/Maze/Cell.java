@@ -56,7 +56,9 @@ public class Cell {
     public int getNeighborCount(){
         return neighborCount;
     }
-     
+    /**
+     * sets a cells explored boolean to true  
+     */ 
     public void explore(){
         explored = true;
     }
