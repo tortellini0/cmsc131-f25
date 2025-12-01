@@ -55,21 +55,33 @@ public class Cell {
 
     public int getNeighborCount(){
         return neighborCount;
-    }//TODO test all accesors at once
-
+    }
+     
     public void explore(){
         explored = true;
-    }//TODO test execution
-
+    }
+    /**
+     * changes the status of a cell
+     * @param c - CellStatus - status that the cell is being changed to
+     */
     public void changeStatus(CellStatus c){
         status = c;
-    }//TODO test changing status actually does what it needs to
-
-    public void addNeighbor(Coords coord){
+    }
+    /**
+     * adds a neighbor Coords to the neighbors array
+     * @param coord - Coords - coord that is being added to the array
+     */
+    public boolean addNeighbor(Coords coord){
+        if(coord == null){
+            throw new IllegalArgumentException("coord cant be null");
+        }
         if (neighborCount < 4){
             neighbors[neighborCount] = coord;
+            neighborCount++;
+            return true;
         }
-    }//TODO test failed add if their are already 4 neighbors
-    //TODO test adding neighbors starts from the begining of the list 
+        return false;
+    }
+    
 
 }
