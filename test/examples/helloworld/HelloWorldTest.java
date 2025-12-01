@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
-import examples.helloworld.HelloWorld;
+//import examples.helloworld.HelloWorld;
 
 /**
  * Unit tests for HelloWorld class defined in exercises.week00.

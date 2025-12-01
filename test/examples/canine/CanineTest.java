@@ -108,7 +108,7 @@ public class CanineTest {
     @Test
     void populationIncrementsWhenInstanceDeclared() {
         int oldPopulation = Canine.population;
-        Canine newDog = new Canine();
+        //Canine newDog = new Canine();
         assertEquals(
             oldPopulation + 1, 
             Canine.population

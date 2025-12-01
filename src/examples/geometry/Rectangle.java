@@ -5,7 +5,6 @@ public class Rectangle {
     private Point lowerLeft, upperRight;
 
     public Rectangle(Point ll, Point ur) {
-        // TODO data validation: check orientation of ll and ur
         lowerLeft = ll;
         upperRight = ur;
     }
