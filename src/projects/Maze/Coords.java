@@ -17,7 +17,11 @@ public class Coords {
     public int getCol() {
         return col;
     }
-
+    /**
+     * tests if two Coords are referencing the same row and col position
+     * @param other - Coords - other coord being compared to
+     * @return - True for same position referenced - False for different position referenced
+     */
     public boolean equals(Coords other) {
         return (
             getRow() == other.getRow()
