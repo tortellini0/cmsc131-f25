@@ -20,6 +20,20 @@ public class CoordsTest {
         coord4 = new Coords(8,4);
         coord5 = new Coords(5,7);
     }
+
+    @Test
+    void addNeighborThrowsForInvalidArgument(){
+        Exception exception = assertThrows(
+            IllegalArgumentException.class, 
+            () -> {coord1.equals(null);}
+        );
+        assertEquals(
+            "other cant be null",
+            exception.getMessage()
+        );
+    }
+
+
     @Test
     void testCoordsEquals(){
         assertTrue(coord1.equals(coord2));

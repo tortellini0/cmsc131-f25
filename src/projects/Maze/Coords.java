@@ -23,6 +23,9 @@ public class Coords {
      * @return - True for same position referenced - False for different position referenced
      */
     public boolean equals(Coords other) {
+        if (other == null){
+            throw new IllegalArgumentException("other cant be null");
+        }
         return (
             getRow() == other.getRow()
             && getCol() == other.getCol()
