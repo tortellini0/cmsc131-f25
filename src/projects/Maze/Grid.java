@@ -10,14 +10,27 @@ public class Grid {
         cellCount = 0;
     }
 
+    public Cell getFirstCellWithStatus(CellStatus c){
+        for (int i = 0; i < getAllCells().length; i++){
+            if (cells[i].getStatus() == c){
+                return cells[i];
+            }
+            
+        }
+        return null;
+    }
+
     public boolean insertCell(Cell cell) {
+        if(cell == null){
+            throw new IllegalArgumentException("cell cant be null");
+        }
         if (cellCount < cells.length) {
             cells[cellCount] = cell;
             cellCount++;
             return true;
         }
         return false;
-    }// TODO test insert cell success and fail
+    }
 
     public Cell getCell(Coords vh) {
         for (int idx = 0; idx < cellCount; idx++) {
@@ -38,5 +51,5 @@ public class Grid {
             allCells[idx] = cells[idx];
         }
         return allCells;
-    }//TODO test that there is no 
+    }
 }

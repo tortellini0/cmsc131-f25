@@ -24,15 +24,48 @@ public class Maze {
     public Maze(int maxCells) {
         grid = new Grid(maxCells);
     }
+
+    public Grid getGrid(){
+        return grid;
+    }
+
+    public Cell getEnd(){
+        Cell end = grid.getFirstCellWithStatus(CellStatus.E);
+        return end;
+    }
+
+    public Cell getStart(){
+        Cell start = grid.getFirstCellWithStatus(CellStatus.S);
+        return start;
+    }
+
     public void insertCell(Cell cell){
-        if (cell == null){
-            throw new IllegalArgumentException("coord cant be null");
-        }
         grid.insertCell(cell);
-        
     }
     public void discoverAndSetupNeighbors() {
-
+        Cell[] cellList = grid.getAllCells();
+        for (int i = 0; i < cellList.length; i++){
+            Cell targetCell = cellList[i];
+            
+            for(int n = 0; n < cellList.length; n++){
+                if(n != i){
+                    Cell tempNeighborCell = cellList[n];
+                    if(checkOrthogonal(targetCell, tempNeighborCell)){
+                        targetCell.addNeighbor(tempNeighborCell.getCoords());
+                    }
+                }
+            }
+        }
+    }
+    
+    public boolean checkOrthogonal(Cell cell1, Cell cell2){
+        int horizontalDifference = Math.abs(cell1.getCoords().getRow()-cell2.getCoords().getRow());
+        int verticalDifference = Math.abs(cell1.getCoords().getCol()-cell2.getCoords().getCol());
+        if(horizontalDifference + verticalDifference == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
