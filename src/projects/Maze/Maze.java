@@ -82,6 +82,20 @@ public class Maze {
         }
     }
 
+
+    public void DFS(Cell cell){
+        cell.explore();
+        System.out.println(
+            String.format("Exploring cell (%s,%s)", cell.getCoords().getRow(),cell.getCoords().getCol())
+        );
+        for (Coords coord : cell.getNeighbors()){
+            Cell neighbor = grid.getCell(coord);
+            if (!neighbor.getExplored()){
+                DFS(neighbor);
+            }
+        }
+    }
+
     /**
      * Provided by Dusel. Assumes grid cell has a getStatus() method.
      * @param filename - Output filename.
