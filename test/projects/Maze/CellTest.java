@@ -65,6 +65,7 @@ public class CellTest {
         Coords[] expectedNeighbors = new Coords[4];
         assertEquals(0,cell1.getNeighborCount());
         
+        // compares {null, null, null, null} to {null, null, null, null}
         for (int i = 0; i < 4; i++){
             assertEquals(expectedNeighbors[i],neighborsTemp[i]);
         }

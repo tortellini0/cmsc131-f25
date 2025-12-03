@@ -9,6 +9,15 @@ import org.junit.jupiter.api.Test;
 public class MazeTest {
     Maze maze;
     @BeforeEach
+    /**
+     *     0 1 2
+     *   -------
+     * 0 | X S X
+     * 1 | O O O
+     * 2 | X O X
+     * 3 | X O X
+     * 4 | X E X
+     */
     void setup(){
         maze = new Maze(7);
         maze.insertCell(new Cell(new Coords(0,1),CellStatus.S));

@@ -56,7 +56,10 @@ public class Maze {
             for(int n = 0; n < cellList.length; n++){
                 if(n != i){
                     Cell tempNeighborCell = cellList[n];
-                    if(checkOrthogonal(targetCell, tempNeighborCell)){
+                    if(
+                        checkOrthogonal(targetCell, tempNeighborCell)
+                        && grid.getCell(tempNeighborCell.getCoords()) != null
+                    ){
                         targetCell.addNeighbor(tempNeighborCell.getCoords());
                     }
                 }
